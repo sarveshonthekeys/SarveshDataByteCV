@@ -1,10 +1,8 @@
 import cv2
 
-# Load Haar cascades
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
 eye_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_eye.xml")
 
-# Start webcam
 cap = cv2.VideoCapture(0)
 
 if not cap.isOpened():
@@ -18,12 +16,10 @@ while True:
 
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-    # Detect faces
     faces = face_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5, minSize=(60, 60))
     for (x, y, w, h) in faces:
         cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 2)
 
-        # Detect eyes inside face
         face_gray = gray[y:y+h, x:x+w]
         face_color = frame[y:y+h, x:x+w]
         eyes = eye_cascade.detectMultiScale(face_gray, scaleFactor=1.1, minNeighbors=10, minSize=(20, 20))
@@ -32,9 +28,9 @@ while True:
 
     cv2.imshow("Face and Eyes Detection", frame)
 
-    # Press 'q' to quit
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
 
 cap.release()
 cv2.destroyAllWindows()
+
