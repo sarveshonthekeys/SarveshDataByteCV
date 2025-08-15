@@ -6,7 +6,7 @@ eye_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_eye.xml
 cap = cv2.VideoCapture(0)
 
 if not cap.isOpened():
-    print("Error: Could not open webcam.")
+    print("error: no webcam dumbass.")
     exit()
 
 while True:
@@ -33,4 +33,5 @@ while True:
 
 cap.release()
 cv2.destroyAllWindows()
+
 
